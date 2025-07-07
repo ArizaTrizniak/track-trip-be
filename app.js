@@ -5,6 +5,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const aboutRouter = require('./routes/about');
+const imageRouter  = require('./routes/image');
 
 const app = express();
 
@@ -17,10 +18,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/about', aboutRouter);
+app.use('/image', imageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.send(`404 Not Found: ${req.originalUrl}`)
+  res.send(`404 Not Found???: ${req.originalUrl}`)
 
 });
 
