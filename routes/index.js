@@ -1,10 +1,6 @@
 import express from 'express';
-
 const router = express.Router();
-
-/* GET users listing. */
 router.get('/', (req, res) => {
-  res.send('Hello World!');
+  res.send('Hello from Index!');
 });
-
 export default router;

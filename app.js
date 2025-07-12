@@ -7,6 +7,7 @@ import cors from 'cors';
 import indexRouter from './routes/index.js';
 import aboutRouter from './routes/about.js';
 import imageRouter from './routes/image.js';
+import backgroundsRouter from './routes/backgrounds.js';
 
 import { fileURLToPath } from 'url';
 
@@ -20,27 +21,25 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/about', aboutRouter);
-app.use('/image', imageRouter);
+app.use('/static', express.static(path.join(__dirname, 'public')));
+app.use('/backgrounds', express.static(path.join(__dirname, 'public', 'backgrounds')));
 
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  res.status(404).send(`404 Not Found???: ${req.originalUrl}`);
+app.use('/api', indexRouter);
+app.use('/api/about', aboutRouter);
+app.use('/api/image', imageRouter);
+app.use('/api/backgrounds', backgroundsRouter);
+
+// 404 Not found для API
+app.use('/api/*', (req, res) => {
+  res.status(404).json({ error: `API endpoint not found: ${req.originalUrl}` });
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // Если не используешь шаблоны (pug/ejs), то лучше заменить:
-  // res.render('error');
-  // на
-  res.status(err.status || 500).send(res.locals.message || 'Internal Server Error');
+app.use((err, req, res, next) => {
+  console.error('[API ERROR]', err);
+  res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
 });
 
 export default app;
+
 

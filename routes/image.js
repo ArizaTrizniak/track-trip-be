@@ -1,5 +1,5 @@
 import express from 'express';
-import { modelToPng } from '../services/modelToPng.js'; // обязательно .js!
+import { modelToPng } from '../services/modelToPng.js';
 
 const router = express.Router();
 
@@ -11,13 +11,12 @@ router.post(
         if (
             !model.width ||
             !model.height ||
-            !Array.isArray(model.points) ||
-            !Array.isArray(model.roads)
+            !Array.isArray(model.points)
         ) {
             return res.status(400).send('Invalid graph model');
         }
 
-        const buffer = modelToPng(model);
+        const buffer = await  modelToPng(model);
 
         res.setHeader('Content-Type', 'image/png');
         res.setHeader('Content-Disposition', 'attachment; filename="graph.png"');
