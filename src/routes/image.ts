@@ -1,12 +1,12 @@
-import express from 'express';
+import {Router, Request, Response, json} from 'express';
 import { modelToPng } from '../services/modelToPng.js';
 
-const router = express.Router();
+const router = Router();
 
 router.post(
     '/',
-    express.json(),
-    async (req, res) => {
+    json(),
+    async (req: Request, res: Response) => {
         const model = req.body;
         if (
             !model.width ||

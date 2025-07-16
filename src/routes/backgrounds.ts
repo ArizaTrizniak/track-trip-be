@@ -1,12 +1,12 @@
-import express from 'express';
+import {Router, Request, Response} from 'express';
 import fs from 'fs';
 import path from 'path';
 
-const router = express.Router();
+const router = Router();
 
 const backgroundsDir = path.join(process.cwd(), 'public', 'backgrounds');
 
-router.get('/', (req, res) => {
+router.get('/', (req: Request, res: Response) => {
     fs.readdir(backgroundsDir, (err, files) => {
         if (err) {
             return res.status(500).json({ error: 'Failed to read backgrounds folder' });
