@@ -1,8 +1,8 @@
-import {Router, Request, Response} from 'express';
+import { Router, Request, Response } from 'express';
 
 const router = Router();
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('Hello from Index!');
+router.get('/', (_req: Request, res: Response) => {
+   res.send('Hello from Index!');
 });
 export default router;

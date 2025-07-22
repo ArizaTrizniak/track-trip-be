@@ -7,7 +7,10 @@
     "check": "tsc --noEmit",
     "build": "tsc",
     "start": "npm run check && node dist/server.js",
-    "dev": "tsc --noEmit && tsx watch src/server.ts"
+    "dev": "tsc --noEmit && tsx watch src/server.ts",
+    "lint": "eslint src/**/*.ts",
+    "lint:fix": "eslint src/**/*.ts --fix",
+    "format": "prettier --write src/**/*.{ts,js,json,md}"
   },
   "dependencies": {
     "canvas": "^3.1.2",
@@ -16,17 +19,26 @@
     "debug": "~2.6.9",
     "express": "^4.21.2",
     "http-errors": "~1.6.3",
-    "morgan": "~1.9.1"
+    "morgan": "~1.9.1",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.31.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/cors": "^2.8.19",
     "@types/debug": "^4.1.12",
     "@types/express": "^5.0.3",
     "@types/morgan": "^1.9.10",
     "@types/node": "^24.0.14",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.31.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.3",
+    "prettier": "^3.6.2",
     "ts-node-dev": "^2.0.0",
     "tsx": "^4.20.3",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.38.0"
   }
 }
